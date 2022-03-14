@@ -17,6 +17,7 @@ import('./config/passport.js')
 // require routes
 import { router as indexRouter } from './routes/index.js'
 import { router as authRouter } from './routes/auth.js'
+import { router as cardsRouter } from './routes/cards.js'
 
 // create the express app
 const app = express()
@@ -75,5 +76,8 @@ app.use(function (err, req, res, next) {
     title: `🎊 ${err.status || 500} Error`,
   })
 })
+
+
+app.use('cards', cardsRouter)
 
 export { app }

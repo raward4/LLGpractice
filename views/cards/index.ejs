@@ -1,0 +1,50 @@
+```html
+<%- include('../partials/html-head') %>
+<link rel="stylesheet" href="/stylesheets/cards/index.css">
+<%- include('../partials/nav') %>
+
+<section>
+  <h1> 🃏 🃏 🃏 </h1>
+  <h2>All the cards!</h2>
+  <table class="bn-table table">
+    <thead>
+      <tr>
+        <th scope="col">
+          <i class="fas fa-arrow-down-wide-short">
+          </i>Rank</th>
+        <th scope="col"><i class="fas fa-user">
+        </i>Name</th>
+        <th scope="col">
+          <i class="fas fa-star-half-stroke">
+          </i>Rating</th>
+      </tr>
+    </thead>
+    <tbody>
+    <% cards.forEach((card, idx) => { %>
+      <tr>
+        <td class="td">#<%= idx+1 %> </td>
+        <td class="td"><a href="/cards/<%= card._id %>"><%= card.name %></a></td>
+        <td class="td star-rating">
+          <% for(let i = 0; i < card.avg; i++) { %>
+            <label class = "checked"></label>
+          <% } %> 
+          <% for( let i = 0; i < (5 - card.avg); i++) { %>
+            <label class = "unchecked"></label>
+          <% } %>
+        </td>
+        <td class="td">  
+            <% if (card.owner.equals(user?.profile._id)) { %>
+          <form action="/card/<%= card._id %>?_method=DELETE" method="POST">
+          <button><i class="fas fa-trash-can"></i></button>
+        </form>
+        <% } %>
+        </td>
+    </tr>
+    <% }) %>
+  </tbody>
+  </table>
+  </section>
+  </main>
+  <%- include('../partials/footer') %>
+
+    
